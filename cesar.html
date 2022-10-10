@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Caeser</title>
+    <link rel="icon" href="Untitled design (10).png">
+    <style>
+        body {
+      background-image: url("Black\ And\ Teal\ Futuristic\ Welcome\ To\ Metaverse\ Presentation.png");
+      margin: 0;
+      padding: 0;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background-repeat: no-repeat;
+      background-size: auto;
+    }
+        .container {
+      position: relative;
+      float: right;
+      bottom: 50px;
+      margin: 20px;
+      width: auto;
+    }
+
+    .topnav {
+      overflow: hidden;
+      
+    }
+
+    .topnav a {
+      float: left;
+      color: #0F9597;
+      text-align: center;
+      padding: 50px 20px;
+      text-decoration: none;
+      font-size: 25px;
+      font-weight: bold;
+    }
+
+    .topnav a:hover {
+      background-color: rgb(1, 33, 41);
+      color: white;
+    }
+    #main {
+            position: absolute;
+            top: 235px;
+            left: 500px;
+            background: #005253;
+  border-radius: 5px;
+  padding: 1.2rem
+        }
+        .tit{
+            color: #0F9597;
+            position: absolute;
+            top: 125px;
+            left: 500px;
+            font-size: 50px;
+            font-weight: bolder;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="topnav">
+          <a href="index.html">Home</a>
+          <a href="cesar.html">Caeser</a>
+          <a href="playfair.html">Playfair</a>
+          <a href="affine.html">Affine</a>
+          <a href="about.html">About</a>
+    
+        </div>
+    
+      </div>
+      <div>
+        <p class="tit">Ceaser Cipher</p>
+      </div>
+      <div id="main">
+
+        <label style="color: white; text-align: center; font-size: 20px;">Encrypt</label><br>
+        <textarea name="" cols="40" rows="0" id="plainInput-1" placeholder="Enter the plain text"></textarea><br>
+        <label style="color: white;font-size: 20px; ">Key:-</label><br>
+        <input type="number" id="shiftInput" min="0" max="25"><br>
+        <label style="color: white;font-size: 20px;">Ciphertext</label><br>
+        <textarea name="" cols="40" rows="0" id="encryptedInput-1" placeholder="Decrypted text"></textarea><br>
+        <center>
+        <button id="encrypt-btn">Encrypt</button>
+        <button id="copyToClipBoard">Copy text</button>
+      </center>
+    </div>
+
+    <script>
+        let encryptBtn = document.getElementById('encrypt-btn')
+        let eInput = document.getElementById("encryptedInput-1")
+        let pInput = document.getElementById("plainInput-1")
+        let inputs = [eInput, pInput]
+        let copy = document.getElementById("copyToClipBoard")
+
+        inputs.forEach(
+            input => {
+                input.oninput = () => {
+                    input.value = input.value.toUpperCase()
+                }
+            }
+        )
+        function encrypt() {
+            let pInput = document.getElementById("plainInput-1").value;
+            let sol = ''
+            let shiftInput = parseInt(document.getElementById("shiftInput").value)
+            for (var i = 0; i < pInput.length; i++) {
+                let ascii_num = pInput[i].charCodeAt()
+                let sum = ascii_num + shiftInput
+                sum >= 65 && sum <= 90 ? sol += String.fromCharCode(sum) : sum > 90 ? sol += String.fromCharCode(65 + (sum & 91)) : sol += pInput[i]
+            }
+            eInput.value = sol
+        }
+        encryptBtn.addEventListener('click', encrypt)
+    </script>
+</body>
+</html>
